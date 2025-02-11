@@ -252,11 +252,13 @@ public class Interface extends JFrame{
             public void actionPerformed(ActionEvent actionEvent) {
                 numbers.addLast(convert(current_number));
 
+                //Debug messages
                 System.out.println("Begin first input:");
                 System.out.println(numbers);
                 System.out.println(methods);
                 System.out.println("---");
 
+                //Root processing
                 if (methods.contains("sqrt")){
                     while(methods.contains("sqrt")){
                         int func_pointer = methods.indexOf("sqrt");
@@ -266,12 +268,12 @@ public class Interface extends JFrame{
                     }
                 }
 
+                //Negative numbers processing
                 if (methods.getFirst().equals("f-")){
                     methods.removeFirst();
 
                     numbers.set(0, numbers.getFirst() * -1);
                 }
-
                 if (methods.contains("-")){
                     while (methods.contains("-")){
                         int minus_pointer = methods.indexOf("-");
@@ -294,7 +296,6 @@ public class Interface extends JFrame{
                         throw new RuntimeException(e);
                     }
 
-
                     ans = convert(final_result);
 
                     if (final_result.equals("Infinity") || final_result.equals("NaN")){
@@ -303,13 +304,12 @@ public class Interface extends JFrame{
                     else {
                         output_field.setText(display_text + "  =  " + final_result);
                     }
-
-
                 }
                 else {
                     output_field.setText("SYNTAX ERROR");
                 }
 
+                //Reset vars
                 current_number = "";
                 display_text = "";
                 numbers.removeAll(numbers);
