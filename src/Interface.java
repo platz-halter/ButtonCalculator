@@ -203,75 +203,6 @@ public class Interface extends JFrame{
                 output_field.setText(display_text);
             }
         });
-        button_equals.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                numbers.addLast(convert(current_number));
-
-                System.out.println("Begin first input:");
-                System.out.println(numbers);
-                System.out.println(methods);
-                System.out.println("---");
-
-                if (methods.contains("sqrt")){
-                    while(methods.contains("sqrt")){
-                        int func_pointer = methods.indexOf("sqrt");
-                        double num = numbers.get(func_pointer);
-                        methods.remove(func_pointer);
-                        numbers.set(func_pointer, Math.sqrt(num));
-                    }
-                }
-
-                if (methods.getFirst().equals("f-")){
-                    methods.removeFirst();
-
-                    numbers.set(0, numbers.getFirst() * -1);
-                }
-
-                if (methods.contains("-")){
-                    while (methods.contains("-")){
-                        int minus_pointer = methods.indexOf("-");
-                        methods.set(minus_pointer, "+");
-                        int minus_number = minus_pointer + 1;
-
-                        numbers.set(minus_number, numbers.get(minus_number) * -1);
-                    }
-                }
-
-                if (methods.size() < numbers.size() * 2 ) {
-                    //brackets feature will go here
-
-                    //call calculation class
-                    String final_result = null;
-                    try {
-                        final_result = Double.toString(new Calculation().calc(numbers, methods));
-                    } catch (Exception e) {
-                        output_field.setText("SYNTAX ERROR");
-                        throw new RuntimeException(e);
-                    }
-
-
-                    ans = convert(final_result);
-
-                    if (final_result.equals("Infinity") || final_result.equals("NaN")){
-                        output_field.setText("SYNTAX ERROR");
-                    }
-                    else {
-                        output_field.setText(display_text + "  =  " + final_result);
-                    }
-
-
-                }
-                else {
-                    output_field.setText("SYNTAX ERROR");
-                }
-
-                current_number = "";
-                display_text = "";
-                numbers.removeAll(numbers);
-                methods.removeAll(methods);
-            }
-        });
         button_clear.addActionListener(new ActionListener() { //Full reset all values
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -314,6 +245,75 @@ public class Interface extends JFrame{
 
                 display_text = display_text + "√";
                 output_field.setText(display_text);
+            }
+        });
+        button_equals.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                numbers.addLast(convert(current_number));
+
+                //Debug messages
+                System.out.println("Begin first input:");
+                System.out.println(numbers);
+                System.out.println(methods);
+                System.out.println("---");
+
+                //Root processing
+                if (methods.contains("sqrt")){
+                    while(methods.contains("sqrt")){
+                        int func_pointer = methods.indexOf("sqrt");
+                        double num = numbers.get(func_pointer);
+                        methods.remove(func_pointer);
+                        numbers.set(func_pointer, Math.sqrt(num));
+                    }
+                }
+
+                //Negative numbers processing
+                if (methods.getFirst().equals("f-")){
+                    methods.removeFirst();
+
+                    numbers.set(0, numbers.getFirst() * -1);
+                }
+                if (methods.contains("-")){
+                    while (methods.contains("-")){
+                        int minus_pointer = methods.indexOf("-");
+                        methods.set(minus_pointer, "+");
+                        int minus_number = minus_pointer + 1;
+
+                        numbers.set(minus_number, numbers.get(minus_number) * -1);
+                    }
+                }
+
+                if (methods.size() < numbers.size() * 2 ) {
+                    //brackets feature will go here
+
+                    //call calculation class
+                    String final_result = null;
+                    try {
+                        final_result = Double.toString(new Calculation().calc(numbers, methods));
+                    } catch (Exception e) {
+                        output_field.setText("SYNTAX ERROR");
+                        throw new RuntimeException(e);
+                    }
+
+                    ans = convert(final_result);
+
+                    if (final_result.equals("Infinity") || final_result.equals("NaN")){
+                        output_field.setText("SYNTAX ERROR");
+                    }
+                    else {
+                        output_field.setText(display_text + "  =  " + final_result);
+                    }
+                }
+                else {
+                    output_field.setText("SYNTAX ERROR");
+                }
+
+                //Reset vars
+                current_number = "";
+                display_text = "";
+                numbers.removeAll(numbers);
+                methods.removeAll(methods);
             }
         });
     }
