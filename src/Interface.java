@@ -203,6 +203,50 @@ public class Interface extends JFrame{
                 output_field.setText(display_text);
             }
         });
+        button_clear.addActionListener(new ActionListener() { //Full reset all values
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                display_text = "";
+                current_number = "";
+
+                numbers.removeAll(numbers);
+                methods.removeAll(methods);
+
+                output_field.setText(display_text);
+            }
+        });
+        button_multiply.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                numbers.add(convert(current_number));
+                methods.add("*");
+
+                current_number = "";
+                display_text = display_text + "*";
+                output_field.setText(display_text);
+
+            }
+        });
+        button_divide.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                numbers.add(convert(current_number));
+                methods.add("/");
+
+                current_number = "";
+                display_text = display_text + "/";
+                output_field.setText(display_text);
+            }
+        });
+        rootButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                methods.add("sqrt");
+
+                display_text = display_text + "√";
+                output_field.setText(display_text);
+            }
+        });
         button_equals.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -270,50 +314,6 @@ public class Interface extends JFrame{
                 display_text = "";
                 numbers.removeAll(numbers);
                 methods.removeAll(methods);
-            }
-        });
-        button_clear.addActionListener(new ActionListener() { //Full reset all values
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                display_text = "";
-                current_number = "";
-
-                numbers.removeAll(numbers);
-                methods.removeAll(methods);
-
-                output_field.setText(display_text);
-            }
-        });
-        button_multiply.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                numbers.add(convert(current_number));
-                methods.add("*");
-
-                current_number = "";
-                display_text = display_text + "*";
-                output_field.setText(display_text);
-
-            }
-        });
-        button_divide.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                numbers.add(convert(current_number));
-                methods.add("/");
-
-                current_number = "";
-                display_text = display_text + "/";
-                output_field.setText(display_text);
-            }
-        });
-        rootButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                methods.add("sqrt");
-
-                display_text = display_text + "√";
-                output_field.setText(display_text);
             }
         });
     }
