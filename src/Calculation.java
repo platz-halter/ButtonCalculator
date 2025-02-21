@@ -49,7 +49,7 @@ public class Calculation {
                 number_array.remove(np2);
             }
             else if (func_array.contains("*") || func_array.contains("/")){ //Check if priority is important
-                if (!func_array.get(fp).equals("*") && !func_array.get(fp).equals("/")){
+                if (!func_array.get(fp).equdals("*") && !func_array.get(fp).equals("/")){
                     if (func_array.contains("*")){
                         fp = func_array.indexOf("*");
                     }
